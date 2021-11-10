@@ -1,5 +1,8 @@
 from django.shortcuts import render
-from . import templates
+from django.views.generic import ListView, DetailView
+from .models import Review
 
-def Homepage(request):
-    return render(request, 'main/index.html')
+class Homepage(ListView):
+    model = Review
+    template_name = 'main/index.html'
+    ordering = ['-rating']

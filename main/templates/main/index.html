@@ -1,5 +1,23 @@
 {% extends 'main/header.html' %}
 
-  {% block content %}
-  <h1>...</h1>
-  {% endblock %}
+{% block content %}
+<div class="container">
+  <h2>Top reviews</h2>
+  <div class="container row justify-content-center">
+    {% for r in object_list %}
+      {% if forloop.counter < 4 %}
+      <div class="card" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title">{{r.title}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">By {{r.publisher}}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">{{r.date}}</h6>
+          <h6 class="card-subtitle mb-2">Score: {{r.score}}</h6>
+          <p class="card-text">{{r.content}}</p>
+          <p class="card-text">{{r.rating}}</p>
+        </div>
+      </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}

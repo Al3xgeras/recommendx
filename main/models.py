@@ -1,4 +1,6 @@
 from django.db import models
+from django.contrib.auth.models import User
+from datetime import datetime, date
 
 SCORE_CHOISES = [
     (1, '1'),
@@ -30,8 +32,8 @@ class Review(models.Model):
     content = models.TextField(max_length=6000, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     score = models.PositiveSmallIntegerField(choices=SCORE_CHOISES)
-    #rating = models.PositiveSmallIntegerField(choices=RATING_CHOISES, blank=True)
-    #ikes = models.ManyToManyField(User, blank=True)
+    rating = models.PositiveSmallIntegerField(choices=RATING_CHOISES, blank=True, default=1)
+    #likes = models.ManyToManyField(User, blank=True)
 
 
     def __str__(self):
