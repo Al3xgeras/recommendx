@@ -3,23 +3,13 @@ from django.contrib.auth.models import User
 from datetime import datetime, date
 
 SCORE_CHOISES = [
-    (1, '1'),
-    (2, '2'),
-    (3, '3'),
-    (4, '4'),   
-    (5, '5'),
-    (6, '6'),
-    (7, '7'),
-    (8, '8'),
-    (9, '9'),
-    (10, '10'),
+    (1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5'),
+    (6, '6'), (7, '7'), (8, '8'), (9, '9'), (10, '10'),
 ]
+
 RATING_CHOISES = [
-    (1, '1'),
-    (2, '2'),
-    (3, '3'),
-    (4, '4'),
-    (5, '5'),
+    (1, '1'), (2, '2'), (3, '3'), 
+    (4, '4'), (5, '5'),
 ]
 
 class Review(models.Model):
@@ -27,8 +17,8 @@ class Review(models.Model):
     #group = models.TextField(choices="""""")
     #tags = models.TextField(choices="""""")
     #images = models.FileField()
-    publisher = models.CharField(max_length=50)
-    #publisher = models.ForeignKey(User, on_delete = models.CASCADE)
+    #publisher = models.CharField(max_length=50)
+    publisher = models.ForeignKey(User, on_delete = models.CASCADE)
     content = models.TextField(max_length=6000, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     score = models.PositiveSmallIntegerField(choices=SCORE_CHOISES)

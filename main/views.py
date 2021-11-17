@@ -1,13 +1,11 @@
 from django.shortcuts import render
-from django.views.generic import ListView, DetailView
 from .models import Review
-from django.contrib.auth.forms import UserCreationForm
 
-class Homepage(ListView):
-    model = Review
-    template_name = 'main/index.html'
-    ordering = ['-rating']
+def homepage(request):
+    top_reviews = Review.objects.all().order_by('-rating')
+    latest_reviews = Review.objects.all().order_by('-date')
+    return render(request, 'main/index.html', {'top_reviews':top_reviews, 
+                                            'latest_reviews':latest_reviews})
 
-def register(request):
-    form = UserCreationForm
-    return render(request, 'main/register.html', context={'form':form})
+def login(request):
+    return render(request, 'main/login.html', {'title': 'Login'})
