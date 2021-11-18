@@ -4,44 +4,30 @@
 <br>
 <div class="container">
   <h2>Top reviews</h2>
-  <div class="container row justify-content-between">
     {% for r in top_reviews %}
       {% if forloop.counter < 4 %}
-      <div class="card" style="width: 18rem;">
-        <div class="card-body">
-          <h5 class="card-title">{{r.title}}</h5>
-          <h6 class="card-subtitle mb-2 text-muted">By {{r.publisher}}</h6>
-          <h6 class="card-subtitle mb-2 text-muted">{{r.date|date:"F d, Y"}}</h6>
-          <h6 class="card-subtitle mb-2">Score: {{r.score}}</h6>
-          <p class="card-text">{{r.content}}</p>
-          <p class="card-text">{{r.rating}}</p>
-        </div>
-      </div>
+         {{r.title}}
+          ext-muted">By {{r.publisher}}
+          ext-muted">{{r.date|date:"F d, Y"}}
+          Score: {{r.score}}
+          {{r.content}}
+          {{r.rating}}
       {% endif %}
     {% endfor %}
-  </div>
 </div>
 <br><br>
 
-<div class="container w-25 col align-content-center">
+<div class="container">
   <h2>Latest reviews</h2>
-   {% for r in latest_reviews %}
-    {% if forloop.counter < 7 %}
-    <div class="card" style="width: 18rem;">
-    <div class="card-body col">
-      <div class="row">
-        <h6 class="card-title col">{{r.title}}</h6>
-        <h6 class="card-title col mb-2">by {{r.publisher}}</h6>
-      </div>
-        <small class="card-subtitle row mb-2">{{r.date|date:"F d, Y"}}</small>
-        <div class="row">
-          <h6 class="card-subtitle col mb-2">Score: {{r.score}}</h6>
-        </div>
-      </div>
-    </div>
-    <br>
-    {% endif %}
-  {% endfor %}
+  {% for r in latest_reviews %}
+   {% if forloop.counter < 7 %}
+       {{r.title}}
+       by {{r.publisher}}
+       {{r.date|date:"F d, Y"}}
+         Score: {{r.score}}
+   <br>
+   {% endif %}
+ {% endfor %}
 </div>
 <br>
 

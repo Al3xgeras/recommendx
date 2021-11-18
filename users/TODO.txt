@@ -1,9 +1,9 @@
 1) Finish registration page styling +++
+6) Login +++
+7) Logout +++
 
 2) Fix posts and add testing forms
 3) Add posts as user
 4) View posts
 5) tags? categories?
-6) Login
-7) Sign out
 8) Default view for unauthenticated users
