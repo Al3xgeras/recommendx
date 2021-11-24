@@ -13,7 +13,7 @@
               <a class="mr-2" href="#">By {{r.publisher}}</a>
               <small class="text-muted">{{r.date|date:"F d, Y"}}</small>
             </div>
-            <h2><a class="article-title" href="#">{{r.title}}</a></h2>
+            <h2><a class="article-title" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
             <p class="article-content">{{r.content}}</p>
             <p class="article-content">Review rating: {{r.rating}}</p>
           </div>
@@ -35,7 +35,7 @@
               <a class="mr-2" href="#">By {{r.publisher}}</a>
               <small class="text-muted">{{r.date|date:"F d, Y"}}</small>
             </div>
-            <h2><a class="article-title" href="#">{{r.title}}</a></h2>
+            <h2><a class="article-title" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
             <p class="article-content">{{r.content}}</p>
             <p class="article-content">Review rating: {{r.rating}}</p>
           </div>

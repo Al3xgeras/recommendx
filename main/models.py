@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from datetime import datetime, date
+from django.urls import reverse
 
 SCORE_CHOISES = [
     (1, '1'), (2, '2'), (3, '3'), (4, '4'), (5, '5'),
@@ -22,9 +23,12 @@ class Review(models.Model):
     content = models.TextField(max_length=6000, blank=True)
     date = models.DateTimeField(auto_now_add=True)
     score = models.PositiveSmallIntegerField(choices=SCORE_CHOISES)
-    rating = models.PositiveSmallIntegerField(choices=RATING_CHOISES, blank=True, default=1)
+    rating = models.PositiveSmallIntegerField(choices=RATING_CHOISES, blank=True, default=0)
     #likes = models.ManyToManyField(User, blank=True)
 
 
     def __str__(self):
         return self.title
+
+    def get_absolute_url(self):
+        return reverse('review-detail', kwargs={'pk': self.pk})
