@@ -22,6 +22,18 @@ class ReviewListView(ListView):
         context['latest_reviews'] = Review.objects.all().order_by('-date')
         return context 
 
+class TopReviewsListView(ListView):
+    model = Review
+    template_name = 'main/top_reviews.html'
+    context_object_name = 'top_reviews'
+    ordering = ['-rating']
+
+class LatestReviewsListView(ListView):
+    model = Review
+    template_name = 'main/latest_reviews.html'
+    context_object_name = 'latest_reviews'
+    ordering = ['-date']
+
 class ReviewDetailView(DetailView):
     model = Review
     template_name = 'main/review_detail.html'

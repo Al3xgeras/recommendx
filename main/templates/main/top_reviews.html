@@ -1,0 +1,24 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+<br>
+<div class="container">
+    {% for r in top_reviews %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ r.publisher.profile.image.url }}" alt="">
+            <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2" href="#">By {{r.publisher}}</a>
+                <small class="text-muted">{{r.date|date:"F d, Y"}}</small>
+            </div>
+            <h2><a class="article-title" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
+            <p class="article-content">{{r.content}}</p>
+            <p class="article-content">Review rating: {{r.rating}}</p>
+            </div>
+        </article>
+    {% endfor %}
+</div>
+<br>
+
+{% endblock %}

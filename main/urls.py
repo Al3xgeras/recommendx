@@ -1,11 +1,14 @@
 from django.urls import path
 from .views import (ReviewListView, ReviewDetailView, 
                     ReviewCreateView, ReviewUpdateView,
-                    ReviewDeleteView)
+                    ReviewDeleteView, TopReviewsListView,
+                    LatestReviewsListView)
 from . import views
 
 urlpatterns = [
     path('', ReviewListView.as_view(), name = 'homepage'),
+    path('top_reviews/', TopReviewsListView.as_view(), name = 'top-reviews'),
+    path('latest_reviews/', LatestReviewsListView.as_view(), name = 'latest-reviews'),
     path('review/<int:pk>/', ReviewDetailView.as_view(), name = 'review-detail'),
     path('review/new/', ReviewCreateView.as_view(), name = 'review-create'),
     path('review/<int:pk>/update/', ReviewUpdateView.as_view(), name = 'review-update'),

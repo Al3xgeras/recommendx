@@ -3,7 +3,7 @@
 {% block content %}
 <br>
 <div class="container">
-  <h2>Top reviews</h2>
+  <a class="mr-2" href="#">Top reviews</a>
     {% for r in top_reviews %}
       {% if forloop.counter < 4 %}
         <article class="media content-section">
@@ -24,7 +24,7 @@
 <br><br>
 
 <div class="container">
-  <h2>Latest reviews</h2>
+  <a class="mr-2" href="#">Latest reviews</a>
 
   {% for r in latest_reviews %}
    {% if forloop.counter < 7 %}
