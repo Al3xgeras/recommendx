@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.contrib.auth.models import User
 from django.views.generic import (ListView, DetailView, 
                                 CreateView, UpdateView, 
                                 DeleteView)
@@ -16,23 +17,35 @@ class ReviewListView(ListView):
     template_name = 'main/index.html'
     context_object_name = 'top_reviews'
     ordering = ['-rating']
-    
+
     def get_context_data(self, *args, **kwargs):
         context = super(ReviewListView, self).get_context_data(*args, **kwargs)
         context['latest_reviews'] = Review.objects.all().order_by('-date')
         return context 
+
+class UserReviewListView(ListView):
+    model = Review
+    template_name = 'main/user_reviews.html'
+    context_object_name = 'reviews'
+    paginate_by = 5
+
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Review.objects.filter(publisher=user).order_by('-date')
 
 class TopReviewsListView(ListView):
     model = Review
     template_name = 'main/top_reviews.html'
     context_object_name = 'top_reviews'
     ordering = ['-rating']
+    paginate_by = 5
 
 class LatestReviewsListView(ListView):
     model = Review
     template_name = 'main/latest_reviews.html'
     context_object_name = 'latest_reviews'
     ordering = ['-date']
+    paginate_by = 5
 
 class ReviewDetailView(DetailView):
     model = Review
