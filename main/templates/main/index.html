@@ -15,7 +15,7 @@
             </div>
             <h2><a class="btn btn-lg article-title" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
             <p class="article-content">{{r.content}}</p>
-            <p class="article-content">Review rating: {{r.rating}}</p>
+            <p class="article-content">Review rating: <span class="badge rounded-pill bg-dark">{{r.rating}}</span></p>
           </div>
         </article>
       {% endif %}
@@ -37,7 +37,7 @@
             </div>
             <h2><a class="btn btn-lg article-title" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
             <p class="article-content">{{r.content}}</p>
-            <p class="article-content">Review rating: {{r.rating}}</p>
+            <p class="article-content">Review rating: <span class="badge rounded-pill bg-dark">{{r.rating}}</span></p>
           </div>
         </article>
    {% endif %}

@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1 class="mb-3">Reviews by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
+<h1 class="mb-3 mt-3">Reviews by {{ view.kwargs.username }} ({{ page_obj.paginator.count }})</h1>
 <br>
 <div class="container">
     {% for r in reviews %}
@@ -13,7 +13,7 @@
             <a class="mr-2 btn btn-light" href="{% url 'user-reviews' r.publisher.username %}">By {{ r.publisher }}</a>
             <small class="text-muted">{{ r.date|date:"F d, Y" }}</small>
           </div>
-          <h2><a class="btn btn-outline-dark article-title" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
+          <h2><a class="btn article-title btn-lg" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
           <p class="article-content">{{r.content}}</p>
           <p class="article-content">Review rating: {{r.rating}}</p>
         </div>

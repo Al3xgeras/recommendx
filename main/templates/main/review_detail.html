@@ -7,7 +7,7 @@
         <img class="rounded-circle article-img" src="{{ object.publisher.profile.image.url }}" alt="">
         <div class="media-body">
         <div class="article-metadata">
-            <a class="mr-2 btn btn-sm" href="{% url 'user-reviews' object.publisher.username %}">By {{object.publisher}}</a>
+            <a class="mr-2 btn btn-lg" href="{% url 'user-reviews' object.publisher.username %}">By {{object.publisher}}</a>
             <small class="text-muted">{{object.date|date:"F d, Y"}}</small>
             {% if object.publisher == user %}
             <div>
@@ -16,9 +16,9 @@
             </div>
             {% endif %}
         </div>
-        <h2 class="btn btn-lg article-title">{{object.title}}</h2>
+        <h1 class="btn btn-lg article-title"><strong>{{object.title}}</strong></h1>
         <p class="article-content">{{object.content}}</p>
-        <p class="article-content">Review rating: {{object.rating}}</p>
+        <p class="article-content">Review rating: <span class="badge rounded-pill bg-dark">{{object.rating}}</span></p>
         </div>
     </article>
 </div>
