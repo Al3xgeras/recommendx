@@ -1,6 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.views.generic import (ListView, DetailView, 
                                 CreateView, UpdateView, 
                                 DeleteView)
@@ -56,6 +58,13 @@ class ReviewDetailView(DetailView):
     model = Review
     template_name = 'main/review_detail.html'
 
+    def get_context_data(self, *args, **kwargs):
+        context = super(ReviewDetailView, self).get_context_data()
+        review = get_object_or_404(Review, id=self.kwargs['pk'])
+        total_likes = review.total_likes()
+        context['total_likes'] = total_likes
+        return context
+
 class ReviewCreateView(LoginRequiredMixin, CreateView):
     model = Review
     form_class = ReviewCreateForm
@@ -87,3 +96,8 @@ class ReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         if self.request.user == review.publisher:
             return True
         return False
+
+def LikeView(request, pk):
+    review = get_object_or_404(Review, id=request.POST.get('review_id'))
+    review.likes.add(request.user)
+    return HttpResponseRedirect(reverse('review-detail', args=[str(pk)]))

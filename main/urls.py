@@ -2,7 +2,8 @@ from django.urls import path
 from .views import (ReviewListView, ReviewDetailView, 
                     ReviewCreateView, ReviewUpdateView,
                     ReviewDeleteView, TopReviewsListView,
-                    LatestReviewsListView, UserReviewListView)
+                    LatestReviewsListView, UserReviewListView, 
+                    LikeView)
 from . import views
 
 urlpatterns = [
@@ -14,4 +15,5 @@ urlpatterns = [
     path('review/new/', ReviewCreateView.as_view(), name = 'review-create'),
     path('review/<int:pk>/update/', ReviewUpdateView.as_view(), name = 'review-update'),
     path('review/<int:pk>/delete/', ReviewDeleteView.as_view(), name = 'review-delete'),
+    path('like/<int:pk>/', LikeView, name = 'like-review'),
 ]
