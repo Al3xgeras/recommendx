@@ -4,13 +4,18 @@ from django.contrib.auth.models import User
 from django.views.generic import (ListView, DetailView, 
                                 CreateView, UpdateView, 
                                 DeleteView)
-from .models import Review
+from .models import Review, Category
+from .forms import ReviewCreateForm
 
+choises = Category.objects.all().values_list('name', 'name')
+
+"""
 def homepage(request):
     top_reviews = Review.objects.all().order_by('-rating')
     latest_reviews = Review.objects.all().order_by('-date')
     return render(request, 'main/index.html', {'top_reviews':top_reviews, 
                                             'latest_reviews':latest_reviews})
+"""
 
 class ReviewListView(ListView):
     model = Review
@@ -53,7 +58,8 @@ class ReviewDetailView(DetailView):
 
 class ReviewCreateView(LoginRequiredMixin, CreateView):
     model = Review
-    fields = ['title', 'content', 'score']
+    form_class = ReviewCreateForm
+    template_name = 'main/review_form.html'
 
     def form_valid(self, form):
         form.instance.publisher = self.request.user
@@ -61,7 +67,7 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
 
 class ReviewUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Review
-    fields = ['title', 'content', 'score']
+    form_class = ReviewCreateForm
 
     def form_valid(self, form):
         form.instance.publisher = self.request.user

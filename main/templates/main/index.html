@@ -12,6 +12,7 @@
             <div class="article-metadata">
               <a class="mr-2 btn btn-light btn-sm" href="{% url 'user-reviews' r.publisher.username %}">By {{r.publisher}}</a>
               <small class="text-muted">{{r.date|date:"F d, Y"}}</small>
+              <small class="text-muted">{{r.category}}</small>
             </div>
             <h2><a class="btn btn-lg article-title" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
             <p class="article-content">{{r.content}}</p>
@@ -34,6 +35,7 @@
             <div class="article-metadata">
               <a class="mr-2 btn btn-light btn-sm" href="{% url 'user-reviews' r.publisher.username %}">By {{r.publisher}}</a>
               <small class="text-muted">{{r.date|date:"F d, Y"}}</small>
+              <small class="text-muted">{{r.category}}</small>
             </div>
             <h2><a class="btn btn-lg article-title" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
             <p class="article-content">{{r.content}}</p>

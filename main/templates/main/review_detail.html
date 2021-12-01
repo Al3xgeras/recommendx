@@ -9,6 +9,7 @@
         <div class="article-metadata">
             <a class="mr-2 btn btn-lg" href="{% url 'user-reviews' object.publisher.username %}">By {{object.publisher}}</a>
             <small class="text-muted">{{object.date|date:"F d, Y"}}</small>
+            <small class="text-muted">{{object.category}}</small>
             {% if object.publisher == user %}
             <div>
                 <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'review-update' object.id %}">Update</a>
