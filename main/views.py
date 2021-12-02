@@ -2,12 +2,12 @@ from django.shortcuts import render, get_object_or_404
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.http import HttpResponseRedirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 from django.views.generic import (ListView, DetailView, 
                                 CreateView, UpdateView, 
                                 DeleteView)
 from .models import Review, Category, Comment
-from .forms import ReviewCreateForm
+from .forms import ReviewCreateForm, AddCommentForm
 
 choises = Category.objects.all().values_list('name', 'name')
 
@@ -76,12 +76,18 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
 
 class AddCommentView(LoginRequiredMixin, CreateView):
     model = Comment
-    #form_class = ReviewCreateForm
+    form_class = AddCommentForm
     template_name = 'main/add_comment.html'
-    fields = '__all__'
+
     def form_valid(self, form):
-        form.instance.publisher = self.request.user
+        form.instance.name = self.request.user
+        form.instance.review_id = self.kwargs['pk']
         return super().form_valid(form)
+    
+    def get_success_url(self):
+          review_id = self.kwargs['pk']
+          return reverse_lazy('review-detail', kwargs={'pk': review_id})
+
 
 class ReviewUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Review
