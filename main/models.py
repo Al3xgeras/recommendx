@@ -30,9 +30,21 @@ class Review(models.Model):
 
     def total_likes(self):
         return self.likes.count()
-        
+
     def __str__(self):
         return self.title
 
     def get_absolute_url(self):
         return reverse('review-detail', kwargs={'pk': self.pk})
+
+class Comment(models.Model):
+    review = models.ForeignKey(Review, related_name='comments', on_delete = models.CASCADE) 
+    name = models.ForeignKey(User, on_delete = models.CASCADE)
+    content = models.TextField()
+    date_added = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ['date_added']
+        
+    def __str__(self):
+        return '%s - %s' % (self.review.title, self.name)#swap

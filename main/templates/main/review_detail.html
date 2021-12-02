@@ -7,10 +7,10 @@
         <img class="rounded-circle article-img" src="{{ object.publisher.profile.image.url }}" alt="">
         <div class="media-body">
         <div class="article-metadata">
-            <a class="mr-2 btn btn-lg" href="{% url 'user-reviews' object.publisher.username %}">By {{object.publisher}}</a>
-            <small class="text-muted">{{object.date|date:"F d, Y"}}</small>
-            <small class="text-muted">{{object.category}}</small>
-            {% if object.publisher == user %}
+            <a class="mr-2 btn btn-lg" href="{% url 'user-reviews' object.publisher.username %}">By {{review.publisher}}</a>
+            <small class="text-muted">{{review.date|date:"F d, Y"}}</small>
+            <small class="text-muted">{{review.category}}</small>
+            {% if review.publisher == user %}
             <div>
                 <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'review-update' object.id %}">Update</a>
                 <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'review-delete' object.id %}">Delete</a>
@@ -18,15 +18,30 @@
             {% endif %}
         </div>
         <h1 class="btn btn-lg article-title"><strong>{{object.title}}</strong></h1>
-        <p class="article-content">{{object.content}}</p>
-        <p class="article-content">Review rating: <span class="badge rounded-pill bg-dark">{{object.rating}}</span></p>
+        <p class="article-content">{{review.content}}</p>
+        <p class="article-content">Review rating: <span class="badge rounded-pill bg-dark">{{review.rating}}</span></p>
         </div>
-        <br>
         <hr>
         <form action="{% url 'like-review' review.pk %}" method="POST">
             {% csrf_token %}
             <button class="btn btn-primary btn-sm" type="submit" name="review_id" value="{{review.id}}">Like</button> - {{ total_likes }} likes
         </form>
+        <br>
+        <div class="container">
+            <h2 class="article-title">Comment section</h2>
+            {% if not review.comments.all %}
+                <p>There are no comments yet</p>
+            {% else %}
+            {% for comment in review.comments.all %}
+                <hr>
+                <strong>{{ comment.name }}</strong> - <small class="text-muted">{{ comment.date_added }}</small>
+                <br>
+                {{ comment.content }}
+            {% endfor %}
+            {% endif %}
+            <hr>
+            <a class="btn btn-lg" href="{% url 'add-comment' review.pk %}"><em>Add comment</em></a>
+        </div>
     </article>
 </div>
 <br>

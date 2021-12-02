@@ -6,7 +6,7 @@ from django.urls import reverse
 from django.views.generic import (ListView, DetailView, 
                                 CreateView, UpdateView, 
                                 DeleteView)
-from .models import Review, Category
+from .models import Review, Category, Comment
 from .forms import ReviewCreateForm
 
 choises = Category.objects.all().values_list('name', 'name')
@@ -70,6 +70,15 @@ class ReviewCreateView(LoginRequiredMixin, CreateView):
     form_class = ReviewCreateForm
     template_name = 'main/review_form.html'
 
+    def form_valid(self, form):
+        form.instance.publisher = self.request.user
+        return super().form_valid(form)
+
+class AddCommentView(LoginRequiredMixin, CreateView):
+    model = Comment
+    #form_class = ReviewCreateForm
+    template_name = 'main/add_comment.html'
+    fields = '__all__'
     def form_valid(self, form):
         form.instance.publisher = self.request.user
         return super().form_valid(form)
