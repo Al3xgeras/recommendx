@@ -5,7 +5,7 @@ from PIL import Image
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = CloudinaryField('image')
+    image = CloudinaryField('media')
 
     def __str__(self):
         return f'{self.user.username} Profile'
