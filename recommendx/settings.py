@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'main.apps.MainConfig',
     'users.apps.UsersConfig',
     'crispy_forms',
+    'cloudinary',
 ]
 
 MIDDLEWARE = [
