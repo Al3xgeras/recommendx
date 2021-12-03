@@ -19,17 +19,6 @@ def register(request):
         form = UserRegisterForm
     return render(request, 'users/register.html', {'form':form, 'title':'Register'})
 
-"""
-class ProfileView(ListView):
-    model = Review
-    template_name = 'users/profile.html'
-    context_object_name = 'reviews'
-    paginate_by = 5
-
-    def get_queryset(self):
-        user = get_object_or_404(User, username=self.kwargs.get('username'))
-        return Review.objects.filter(publisher=user).order_by('-date')
-"""
 @login_required
 def profile(request):
     reviews = Review.objects.filter(publisher=request.user).order_by('-date')

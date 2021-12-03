@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 
 from pathlib import Path
 import os
+import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -134,3 +137,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = 'homepage'
 LOGIN_URL = 'login'
+
+cloudinary.config( 
+  cloud_name = "recommendx-herokuapp-com", 
+  api_key = "893421248636872", 
+  api_secret = "92I_Ao_jhgpOUCyKE6o2dw_rk8A",
+  secure = True
+)
