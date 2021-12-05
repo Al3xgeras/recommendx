@@ -54,6 +54,11 @@ class LatestReviewsListView(ListView):
     ordering = ['-date']
     paginate_by = 5
 
+def CategoryView(request, cat):
+    category_reviews = Review.objects.filter(category=cat)
+    context = {'cat':cat, 'category_reviews':category_reviews}
+    return render(request, template_name='main/category.html', context=context)
+
 class ReviewDetailView(DetailView):
     model = Review
     template_name = 'main/review_detail.html'
