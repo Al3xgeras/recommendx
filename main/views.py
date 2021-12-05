@@ -55,8 +55,8 @@ class LatestReviewsListView(ListView):
     paginate_by = 5
 
 def CategoryView(request, cat):
-    category_reviews = Review.objects.filter(category=cat)
-    context = {'cat':cat, 'category_reviews':category_reviews}
+    category_reviews = Review.objects.filter(category__iexact=cat.replace('-', ' '))
+    context = {'cat':cat.title().replace('-', ' '), 'category_reviews':category_reviews}
     return render(request, template_name='main/category.html', context=context)
 
 class ReviewDetailView(DetailView):
