@@ -25,10 +25,9 @@
         {% if user.is_authenticated %}
         <form action="{% url 'like-review' review.pk %}" method="POST">
             {% csrf_token %}
-            <button class="btn btn-primary btn-sm" type="submit" name="review_id" value="{{review.id}}">Like</button> 
+            <button class="btn btn-primary btn-sm" type="submit" name="review_id" value="{{review.id}}">Like</button> - {{ total_likes }} likes
         </form>
         {% endif %}
-        - {{ total_likes }} likes
         <br>
         <div class="container">
             <h2 class="article-title">Comment section</h2>

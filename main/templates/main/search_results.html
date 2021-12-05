@@ -1,0 +1,60 @@
+{% extends 'main/base.html' %}
+
+{% block content %}
+
+{% if searched %}
+    <h1 class="mt-3">Results for {{searched}}</h1>
+    <br>
+    {% for r in result %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ r.publisher.profile.image.url }}" onerror="if (this.src != 'default.jpg') this.src = '../media/default.jpg'">
+            <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2 btn btn-light btn-sm" href="{% url 'user-reviews' r.publisher.username %}">By {{r.publisher}}</a>
+                <small class="text-muted">{{r.date|date:"F d, Y"}}</small>
+                <a class="btn btn-sm mb-1" href="{% url 'category' r.category|slugify %}">{{r.category}}</a>
+            </div>
+            <h2><a class="btn btn-lg article-title" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
+            <p class="article-content">{{r.content}}</p>
+            <p class="article-content">Review rating: <span class="badge rounded-pill bg-dark">{{r.rating}}</span></p>
+            </div>
+        </article>
+    {% endfor %}
+
+    {% for r in result_second %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ r.publisher.profile.image.url }}" onerror="if (this.src != 'default.jpg') this.src = '../media/default.jpg'">
+            <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2 btn btn-light btn-sm" href="{% url 'user-reviews' r.publisher.username %}">By {{r.publisher}}</a>
+                <small class="text-muted">{{r.date|date:"F d, Y"}}</small>
+                <a class="btn btn-sm mb-1" href="{% url 'category' r.category|slugify %}">{{r.category}}</a>
+            </div>
+            <h2><a class="btn btn-lg article-title" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
+            <p class="article-content">{{r.content}}</p>
+            <p class="article-content">Review rating: <span class="badge rounded-pill bg-dark">{{r.rating}}</span></p>
+            </div>
+        </article>
+    {% endfor %}
+    
+    {% for r in result_third %}
+        <article class="media content-section">
+            <img class="rounded-circle article-img" src="{{ r.review.publisher.profile.image.url }}" onerror="if (this.src != 'default.jpg') this.src = '../media/default.jpg'">
+            <div class="media-body">
+            <div class="article-metadata">
+                <a class="mr-2 btn btn-light btn-sm" href="{% url 'user-reviews' r.review.publisher.username %}">By {{r..review.publisher}}</a>
+                <small class="text-muted">{{r.review.date|date:"F d, Y"}}</small>
+                <a class="btn btn-sm mb-1" href="{% url 'category' r.review.category|slugify %}">{{r.review.category}}</a>
+            </div>
+            <h2><a class="btn btn-lg article-title" href="{% url 'review-detail' r.review.id %}">{{r.review.title}}</a></h2>
+            <p class="article-content">{{r.review.content}}</p>
+            <p class="article-content">Review rating: <span class="badge rounded-pill bg-dark">{{r.review.rating}}</span></p>
+            </div>
+        </article>
+    {% endfor %}
+
+{% else %}
+    <h1 class="mt-3">Nothing found or empty request</h1>
+{% endif %}
+
+{% endblock %}

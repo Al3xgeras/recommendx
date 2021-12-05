@@ -11,14 +11,6 @@ from .forms import ReviewCreateForm, AddCommentForm
 
 choises = Category.objects.all().values_list('name', 'name')
 
-"""
-def homepage(request):
-    top_reviews = Review.objects.all().order_by('-rating')
-    latest_reviews = Review.objects.all().order_by('-date')
-    return render(request, 'main/index.html', {'top_reviews':top_reviews, 
-                                            'latest_reviews':latest_reviews})
-"""
-
 class ReviewListView(ListView):
     model = Review
     template_name = 'main/index.html'
@@ -121,3 +113,14 @@ def LikeView(request, pk):
     review = get_object_or_404(Review, id=request.POST.get('review_id'))
     review.likes.add(request.user)
     return HttpResponseRedirect(reverse('review-detail', args=[str(pk)]))
+
+def searchResultsView(request):
+    if request.method == "POST":
+        searched = request.POST.get('searched')
+        context = {'searched':searched,
+        'result':Review.objects.filter(title__contains=searched),
+        'result_second':Review.objects.filter(content__contains=searched),
+        'result_third':Comment.objects.filter(content__contains=searched)}
+        return render(request, 'main/search_results.html', context)
+    else:
+        return render(request, template_name='main/search_results.html')
