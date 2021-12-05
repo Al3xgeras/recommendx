@@ -1,1 +1,0 @@
-web: gunicorn recommendx.wsgi --log-file -

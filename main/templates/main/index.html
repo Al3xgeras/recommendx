@@ -3,43 +3,41 @@
 {% block content %}
 <br>
 <div class="container">
-  <a class="mr-2 btn btn-dark mb-2" href="{% url 'top-reviews' %}">Top reviews</a>
+  <h2>Top reviews</h2>
     {% for r in top_reviews %}
       {% if forloop.counter < 4 %}
         <article class="media content-section">
-          <img class="rounded-circle article-img" src="{{ r.publisher.profile.image.url }}" onerror="if (this.src != 'default.jpg') this.src = '../media/default.jpg'">
+          <img class="rounded-circle article-img" src="{{ r.publisher.profile.image.url }}" alt="">
           <div class="media-body">
             <div class="article-metadata">
-              <a class="mr-2 btn btn-light btn-sm" href="{% url 'user-reviews' r.publisher.username %}">By {{r.publisher}}</a>
+              <a class="mr-2" href="#">By {{r.publisher}}</a>
               <small class="text-muted">{{r.date|date:"F d, Y"}}</small>
-              <a class="btn btn-sm mb-1" href="{% url 'category' r.category %}">{{r.category}}</a>
             </div>
-            <h2><a class="btn btn-lg article-title" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
+            <h2><a class="article-title" href="#">{{r.title}}</a></h2>
             <p class="article-content">{{r.content}}</p>
-            <p class="article-content">Review rating: <span class="badge rounded-pill bg-dark">{{r.rating}}</span></p>
+            <p class="article-content">Review rating: {{r.rating}}</p>
           </div>
         </article>
       {% endif %}
     {% endfor %}
 </div>
-<br>
-<hr>
-<br>
+<br><br>
+
 <div class="container">
-  <a class="mr-2 mb-2 btn btn-dark" href="{% url 'latest-reviews' %}">Latest reviews</a>
+  <h2>Latest reviews</h2>
+
   {% for r in latest_reviews %}
-   {% if forloop.counter < 5 %}
+   {% if forloop.counter < 7 %}
        <article class="media content-section">
-        <img class="rounded-circle article-img" src="{{ r.publisher.profile.image.url }}" onerror="if (this.src != 'default.jpg') this.src = '../media/default.jpg'">
+        <img class="rounded-circle article-img" src="{{ r.publisher.profile.image.url }}" alt="">
           <div class="media-body">
             <div class="article-metadata">
-              <a class="mr-2 btn btn-light btn-sm" href="{% url 'user-reviews' r.publisher.username %}">By {{r.publisher}}</a>
+              <a class="mr-2" href="#">By {{r.publisher}}</a>
               <small class="text-muted">{{r.date|date:"F d, Y"}}</small>
-              <a class="btn btn-sm mb-1" href="#">{{r.category}}</a>
             </div>
-            <h2><a class="btn btn-lg article-title" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
+            <h2><a class="article-title" href="#">{{r.title}}</a></h2>
             <p class="article-content">{{r.content}}</p>
-            <p class="article-content">Review rating: <span class="badge rounded-pill bg-dark">{{r.rating}}</span></p>
+            <p class="article-content">Review rating: {{r.rating}}</p>
           </div>
         </article>
    {% endif %}
