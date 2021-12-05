@@ -3,7 +3,8 @@ from .views import (ReviewListView, ReviewDetailView,
                     ReviewCreateView, ReviewUpdateView,
                     ReviewDeleteView, TopReviewsListView,
                     LatestReviewsListView, UserReviewListView, 
-                    LikeView, AddCommentView, CategoryView, searchResultsView)
+                    LikeView, AddCommentView, CategoryView, searchResultsView,
+                    CommentUpdateView, CommentDeleteView)
 from . import views
 
 urlpatterns = [
@@ -16,7 +17,9 @@ urlpatterns = [
     path('review/<int:pk>/update/', ReviewUpdateView.as_view(), name = 'review-update'),
     path('review/<int:pk>/delete/', ReviewDeleteView.as_view(), name = 'review-delete'),
     path('like/<int:pk>/', LikeView, name = 'like-review'),
-    path('review/<int:pk>/comment', AddCommentView.as_view(), name = 'add-comment'),
+    path('review/<int:pk>/comment/', AddCommentView.as_view(), name = 'add-comment'),
+    path('review/<int:pk>/comment/update/', CommentUpdateView.as_view(), name = 'comment-update'),
+    path('review/<int:pk>/comment/delete/', CommentDeleteView.as_view(), name = 'comment-delete'),
     path('category/<str:cat>/', CategoryView, name='category'),
     path('search_results/', searchResultsView, name='search-results'),
 ]

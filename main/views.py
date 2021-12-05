@@ -59,7 +59,12 @@ class ReviewDetailView(DetailView):
         context = super(ReviewDetailView, self).get_context_data()
         review = get_object_or_404(Review, id=self.kwargs['pk'])
         total_likes = review.total_likes()
+       
+        liked = False
+        if review.likes.filter(id=self.request.user.id).exists():
+            liked = True
         context['total_likes'] = total_likes
+        context['liked'] = liked
         return context
 
 class ReviewCreateView(LoginRequiredMixin, CreateView):
@@ -109,9 +114,38 @@ class ReviewDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
             return True
         return False
 
+class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Comment
+    form_class = AddCommentForm
+
+    def form_valid(self, form):
+        form.instance.name = self.request.user
+        return super().form_valid(form)
+
+    def test_func(self):
+        comment = self.get_object()
+        if self.request.user == comment.name:
+            return True
+        return False
+
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
+    model = Comment
+    success_url = '/'
+    def test_func(self):
+        comment = self.get_object()
+        if self.request.user == comment.name:
+            return True
+        return False
+
 def LikeView(request, pk):
     review = get_object_or_404(Review, id=request.POST.get('review_id'))
-    review.likes.add(request.user)
+    liked = False
+    if review.likes.filter(id=request.user.id).exists():
+        review.likes.remove(request.user)
+        liked = False
+    else:
+        review.likes.add(request.user)
+        liked = True
     return HttpResponseRedirect(reverse('review-detail', args=[str(pk)]))
 
 def searchResultsView(request):
