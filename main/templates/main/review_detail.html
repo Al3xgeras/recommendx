@@ -22,10 +22,12 @@
         <p class="article-content">Review rating: <span class="badge rounded-pill bg-dark">{{review.rating}}</span></p>
         </div>
         <hr>
+        {% if user.is_authenticated %}
         <form action="{% url 'like-review' review.pk %}" method="POST">
             {% csrf_token %}
             <button class="btn btn-primary btn-sm" type="submit" name="review_id" value="{{review.id}}">Like</button> - {{ total_likes }} likes
         </form>
+        {% endif %}
         <br>
         <div class="container">
             <h2 class="article-title">Comment section</h2>
