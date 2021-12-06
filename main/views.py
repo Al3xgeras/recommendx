@@ -8,6 +8,7 @@ from django.views.generic import (ListView, DetailView,
                                 DeleteView)
 from .models import Review, Category, Comment
 from .forms import ReviewCreateForm, AddCommentForm
+from django.core.paginator import Paginator
 
 choises = Category.objects.all().values_list('name', 'name')
 
@@ -15,7 +16,7 @@ class ReviewListView(ListView):
     model = Review
     template_name = 'main/index.html'
     context_object_name = 'top_reviews'
-    ordering = ['-rating']
+    ordering = ['-likes']
 
     def get_context_data(self, *args, **kwargs):
         context = super(ReviewListView, self).get_context_data(*args, **kwargs)
@@ -47,7 +48,7 @@ class LatestReviewsListView(ListView):
     paginate_by = 5
 
 def CategoryView(request, cat):
-    category_reviews = Review.objects.filter(category__iexact=cat.replace('-', ' '))
+    category_reviews = Review.objects.filter(category__iexact=cat.replace('-', ' ')).order_by('-date')
     context = {'cat':cat.title().replace('-', ' '), 'category_reviews':category_reviews}
     return render(request, template_name='main/category.html', context=context)
 

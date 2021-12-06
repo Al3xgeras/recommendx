@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
 from datetime import datetime, date
 from django.urls import reverse
 
@@ -11,6 +12,10 @@ RATING_CHOISES = [
 class Category(models.Model):
     name = models.CharField(max_length=255)
 
+
+    class Meta:
+        verbose_name_plural = "Categories"
+
     def __str__(self):
         return self.name
 
@@ -20,12 +25,12 @@ class Category(models.Model):
 class Review(models.Model):
     title = models.CharField(max_length=50)
     category = models.CharField(max_length=50, default='Movies')
-    #tags = models.TextField(choices="""""")
-    #images = models.FileField()
+    #tags = models.TextField(choices=)
+    images = CloudinaryField('media', null=True, blank=True)
     publisher = models.ForeignKey(User, on_delete = models.CASCADE)
     content = models.TextField(max_length=6000, blank=True)
     date = models.DateTimeField(auto_now_add=True)
-    rating = models.PositiveSmallIntegerField(choices=RATING_CHOISES, blank=True, default=0)
+    #rating = models.PositiveSmallIntegerField(choices=RATING_CHOISES, blank=True, default=0)
     likes = models.ManyToManyField(User, related_name='review_name')
 
     def total_likes(self):

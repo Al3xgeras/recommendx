@@ -55,6 +55,13 @@ body {
     object-fit: cover;
     margin-right: 16px;
   }
+
+  .article-cover {
+    height: 100px;
+    width: 100px;
+    object-fit: cover;
+    margin-right: 16px;
+  }
   
   .article-metadata {
     padding-bottom: 1px;

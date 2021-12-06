@@ -7,7 +7,7 @@
     <br>
     {% for r in result %}
         <article class="media content-section">
-            <img class="rounded-circle article-img" src="{{ r.publisher.profile.image.url }}" onerror="if (this.src != 'default.png') this.src = 'https://res.cloudinary.com/recommendx-herokuapp-com/image/upload/v1638789851/media/default.png'">
+            <img class="rounded-circle article-img" src="{{ r.publisher.profile.image.url }}" onerror="this.src='https://res.cloudinary.com/recommendx-herokuapp-com/image/upload/v1638789851/media/default.png'">
             <div class="media-body">
             <div class="article-metadata">
                 <a class="mr-2 btn btn-light btn-sm" href="{% url 'user-reviews' r.publisher.username %}">By {{r.publisher}}</a>
@@ -15,15 +15,19 @@
                 <a class="btn btn-sm mb-1" href="{% url 'category' r.category|slugify %}">{{r.category}}</a>
             </div>
             <h2><a class="btn btn-lg article-title" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
-            <p class="article-content">{{r.content}}</p>
-           <!-- <p class="article-content">Review rating: <span class="badge rounded-pill bg-dark">{{r.rating}}</span></p>-->
+            <div class="card">
+                {% if r.images.url %}
+                  <img class="article-img" src="{{ r.images.url }}" alt="">
+                {% endif %}
+                <p class="article-content mt-2">{{r.content|slice:"100"}}</p>
+            </div>
             </div>
         </article>
     {% endfor %}
 
     {% for r in result_second %}
         <article class="media content-section">
-            <img class="rounded-circle article-img" src="{{ r.publisher.profile.image.url }}" onerror="if (this.src != 'default.png') this.src = 'https://res.cloudinary.com/recommendx-herokuapp-com/image/upload/v1638789851/media/default.png'">
+            <img class="rounded-circle article-img" src="{{ r.publisher.profile.image.url }}" onerror="this.src='https://res.cloudinary.com/recommendx-herokuapp-com/image/upload/v1638789851/media/default.png'">
             <div class="media-body">
             <div class="article-metadata">
                 <a class="mr-2 btn btn-light btn-sm" href="{% url 'user-reviews' r.publisher.username %}">By {{r.publisher}}</a>
@@ -31,8 +35,12 @@
                 <a class="btn btn-sm mb-1" href="{% url 'category' r.category|slugify %}">{{r.category}}</a>
             </div>
             <h2><a class="btn btn-lg article-title" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
-            <p class="article-content">{{r.content}}</p>
-            <!--<p class="article-content">Review rating: <span class="badge rounded-pill bg-dark">{{r.rating}}</span></p>-->
+            <div class="card">
+                {% if r.images.url %}
+                  <img class="article-img" src="{{ r.images.url }}" alt="">
+                {% endif %}
+                <p class="article-content mt-2">{{r.content|slice:"100"}}</p>
+            </div>
             </div>
         </article>
     {% endfor %}
@@ -47,8 +55,12 @@
                 <a class="btn btn-sm mb-1" href="{% url 'category' r.review.category|slugify %}">{{r.review.category}}</a>
             </div>
             <h2><a class="btn btn-lg article-title" href="{% url 'review-detail' r.review.id %}">{{r.review.title}}</a></h2>
-            <p class="article-content">{{r.review.content}}</p>
-            <!--<p class="article-content">Review rating: <span class="badge rounded-pill bg-dark">{{r.review.rating}}</span></p>-->
+            <div class="card">
+                {% if r.images.url %}
+                  <img class="article-img" src="{{ r.images.url }}" alt="">
+                {% endif %}
+                <p class="article-content mt-2">{{r.content|slice:"100"}}</p>
+            </div>
             </div>
         </article>
     {% endfor %}

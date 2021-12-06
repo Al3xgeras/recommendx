@@ -10,12 +10,12 @@ for choice in choices:
 class ReviewCreateForm(forms.ModelForm):
     class Meta:
         model = Review
-        fields = ('title', 'category', 'content')
+        fields = ('title', 'category', 'content', 'images')
 
         widgets = {
             'title': forms.TextInput(attrs={'class': 'form-control'}),
             'category': forms.Select(choices=choices, attrs={'class': 'form-control'}),
-            'content': forms.Textarea(attrs={'class': 'form-control'})
+            'content': forms.Textarea(attrs={'class': 'form-control'}),
         }
 
 class AddCommentForm(forms.ModelForm):
