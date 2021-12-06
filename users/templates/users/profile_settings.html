@@ -5,7 +5,7 @@
 
   <div class="content-section">
       <div class="media">
-        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" onerror="if (this.src != 'default.png') this.src = '/media/default.png'">
+        <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" onerror="if (this.src != 'default.png') this.src = 'https://res.cloudinary.com/recommendx-herokuapp-com/image/upload/v1638789851/media/default.png'">
         <div class="media-body">
           <a class='btn btn-lg account-heading' href="{% url 'profile' %}">{{ user.username }}</a>
           <p class="text-secondary">{{ user.email }}</p>

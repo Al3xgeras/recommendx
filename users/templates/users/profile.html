@@ -31,7 +31,7 @@
   <h1>{{ user.username }}</h1>
   <h3><a class="btn btn-dark" href="{% url 'profile-settings' %}">Settings</a></h3>
 </div>
-<img class="rounded-circle account-img" src="{{ user.profile.image.url }}" onerror="if (this.src != 'default.png') this.src = '/media/default.png'">
+<img class="rounded-circle account-img" src="{{ user.profile.image.url }}" onerror="if (this.src != 'default.png') this.src = 'https://res.cloudinary.com/recommendx-herokuapp-com/image/upload/v1638789851/media/default.png'">
 <br>
 <div class="container">
   <div class="d-flex justify-content-between mb-2">
