@@ -7,7 +7,7 @@
 <div class="container">
     {% for r in reviews %}
     <article class="media content-section">
-        <img class="rounded-circle article-img" src="{{ r.publisher.profile.image.url }}" onerror="if (this.src != 'default.jpg') this.src = '../media/default.jpg'">
+        <img class="rounded-circle article-img" src="{{ r.publisher.profile.image.url }}" onerror="if (this.src != 'default.png') this.src = '../media/default.png'">
         <div class="media-body">
           <div class="article-metadata">
             <a class="mr-2 btn btn-light" href="{% url 'user-reviews' r.publisher.username %}">By {{ r.publisher }}</a>

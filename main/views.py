@@ -36,7 +36,7 @@ class TopReviewsListView(ListView):
     model = Review
     template_name = 'main/top_reviews.html'
     context_object_name = 'top_reviews'
-    ordering = ['-rating']
+    ordering = ['-likes']
     paginate_by = 5
 
 class LatestReviewsListView(ListView):
