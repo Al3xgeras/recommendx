@@ -8,7 +8,7 @@
     <h1>{{ cat }}</h1>
     {% for r in category_reviews %}
     <article class="media content-section">
-        <img class="rounded-circle article-img" src="{{ r.publisher.profile.image.url }}" onerror="this.src='../media/default.png'>
+        <img class="rounded-circle article-img" src="{{ r.publisher.profile.image.url }}" onerror="this.src='../media/default.png'">
         <div class="media-body">
           <div class="article-metadata">
             <a class="mr-2 btn btn-light btn-sm" href="{% url 'user-reviews' r.publisher.username %}">By {{r.publisher}}</a>
