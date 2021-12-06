@@ -4,7 +4,7 @@
 <br>
 <div class="container">
     <article class="media content-section">
-        <img class="rounded-circle article-img" src="{{ object.publisher.profile.image.url }}" onerror="if (this.src != 'default.png') this.src = '../media/default.png'">
+        <img class="rounded-circle article-img" src="{{ object.publisher.profile.image.url }}" onerror="if (this.src != 'default.png') this.src = '/media/default.png'">
         <div class="media-body">
         <div class="article-metadata">
             <a class="mr-2 btn btn-lg" href="{% url 'user-reviews' object.publisher.username %}">By {{review.publisher}}</a>
