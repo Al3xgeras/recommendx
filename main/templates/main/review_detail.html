@@ -13,16 +13,16 @@
             {% if review.publisher == user %}
             <div>
                 <a class="btn btn-secondary btn-sm mt-1 mb-1" href="{% url 'review-update' object.id %}">Update</a>
-                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'review-delete' object.id %}">Delete</a>
+                <a class="btn btn-danger btn-sm mt-1 mb-1" href="{% url 'review-delete' review.id %}">Delete</a>
             </div>
             {% endif %}
         </div>
-        <h1 class="btn btn-lg article-title"><strong>{{object.title}}</strong></h1>
-        <div class="card">
+        <h1 class="btn btn-lg article-title"><strong>{{review.title}}</strong></h1>
+        <div class="container">
             {% if r.images.url %}
-              <img class="article-img" src="{{ r.images.url }}" alt="">
+              <img class="article-img" src="{{ review.images.url }}" alt="">
             {% endif %}
-            <p class="article-content mt-2">{{r.content}}</p>
+            <p class="article-content mt-2">{{review.content}}</p>
         </div>
         </div>
         <hr>
@@ -38,7 +38,7 @@
         {% else %}
         <small>Login to like</small>
         {% endif %}
-            - {{ total_likes }} likes
+            - <strong>{{ total_likes }} likes</strong>
         </form>
         <br>
         <div class="container">

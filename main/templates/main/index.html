@@ -2,56 +2,73 @@
 
 {% block content %}
 <br>
-<div class="container">
-  <a class="mr-2 btn btn-dark mb-2" href="{% url 'top-reviews' %}">Top reviews</a>
-    {% for r in top_reviews %}
-      {% if forloop.counter < 4 %}
-        <article class="media content-section">
-          <img class="rounded-circle article-img" src="{{ r.publisher.profile.image.url }}" onerror="this.src='https://res.cloudinary.com/recommendx-herokuapp-com/image/upload/v1638789851/media/default.png'">
-          <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2 btn btn-light btn-sm" href="{% url 'user-reviews' r.publisher.username %}">By {{r.publisher}}</a>
-              <small class="text-muted">{{r.date|date:"F d, Y"}}</small>
-              <a class="btn btn-sm mb-1" href="{% url 'category' r.category|slugify %}">{{r.category}}</a>
+<div class="d-flex row">
+  <div class="col-12 col-md-12 col-lg-6">
+    <div class="top-reviews text-center">
+      <a class="mr-2 btn btn-dark mb-2" href="{% url 'top-reviews' %}">Top reviews</a>
+    </div>
+      {% for r in top_reviews %}
+        {% if forloop.counter < 5 %}
+          <article class="media content-section">
+            <div class="image-wrapper text-center">
+              <img class="rounded-circle article-img" src="{{ r.publisher.profile.image.url }}" onerror="this.src='https://res.cloudinary.com/recommendx-herokuapp-com/image/upload/v1638789851/media/default.png'">
             </div>
-            <h2><a class="btn btn-lg article-title" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
-            <div class="card">
-              {% if r.images.url %}
-                <img class="article-img" src="{{ r.images.url }}" alt="">
-              {% endif %}
-              <p class="article-content mt-2">{{r.content|slice:"200"}}</p>
-          </div>
-          </div>
-        </article>
-      {% endif %}
-    {% endfor %}
-</div>
-<br>
-<hr>
-<br>
-<div class="container">
-  <a class="mr-2 mb-2 btn btn-dark" href="{% url 'latest-reviews' %}">Latest reviews</a>
-  {% for r in latest_reviews %}
-   {% if forloop.counter < 5 %}
-       <article class="media content-section">
+            <div class="media-body">
+              <div class="article-metadata text-center">
+                <a class="mr-2 btn btn-light btn-sm" href="{% url 'user-reviews' r.publisher.username %}">By {{r.publisher}}</a>
+                <small class="text-muted">{{r.date|date:"F d, Y"}}</small>
+                <a class="btn btn-sm mb-1" href="{% url 'category' r.category|slugify %}">{{r.category}}</a>
+              </div>
+              <div class="title text-center">
+                <h2><a class="btn btn-lg" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
+              </div>
+              <div class="container">
+                {% if r.images.url %}
+                <div class="image-wrapper text-center">
+                  <img class="article-cover" src="{{ r.images.url }}" alt="">
+                </div>
+                {% endif %}
+                <p class="article-content mt-2">{{r.content|slice:"200"}}</p>
+                <strong> {{ r.likes.count }} likes</strong>
+            </div>
+            </div>
+          </article>
+        {% endif %}
+      {% endfor %}
+  </div>
+  <div class="col-12 col-md-12 col-lg-6">
+    <div class="latest_reviews text-center">
+      <a class="mr-2 mb-2 btn btn-dark" href="{% url 'latest-reviews' %}">Latest reviews</a>
+    </div>
+    {% for r in latest_reviews %}
+     {% if forloop.counter < 5 %}
+     <article class="media content-section">
+      <div class="image-wrapper text-center">
         <img class="rounded-circle article-img" src="{{ r.publisher.profile.image.url }}" onerror="this.src='https://res.cloudinary.com/recommendx-herokuapp-com/image/upload/v1638789851/media/default.png'">
-          <div class="media-body">
-            <div class="article-metadata">
-              <a class="mr-2 btn btn-light btn-sm" href="{% url 'user-reviews' r.publisher.username %}">By {{r.publisher}}</a>
-              <small class="text-muted">{{r.date|date:"F d, Y"}}</small>
-              <a class="btn btn-sm mb-1" href="{% url 'category' r.category|slugify %}">{{r.category}}</a>
-            </div>
-            <h2><a class="btn btn-lg article-title" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
-            <div class="card">
-              {% if r.images.url %}
-                <img class="article-img" src="{{ r.images.url }}" alt="">
-              {% endif %}
-              <p class="article-content mt-2">{{r.content|slice:"200"}}</p>
-            </div>
+      </div>
+      <div class="media-body">
+        <div class="article-metadata text-center">
+          <a class="mr-2 btn btn-light btn-sm" href="{% url 'user-reviews' r.publisher.username %}">By {{r.publisher}}</a>
+          <small class="text-muted">{{r.date|date:"F d, Y"}}</small>
+          <a class="btn btn-sm mb-1" href="{% url 'category' r.category|slugify %}">{{r.category}}</a>
+        </div>
+        <div class="title text-center">
+          <h2><a class="btn btn-lg" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
+        </div>
+        <div class="container">
+          {% if r.images.url %}
+          <div class="image-wrapper text-center">
+            <img class="article-cover" src="{{ r.images.url }}" alt="">
           </div>
-        </article>
-   {% endif %}
- {% endfor %}
+          {% endif %}
+          <p class="article-content mt-2">{{r.content|slice:"200"}}</p>
+          <strong> {{ r.likes.count }} likes</strong>
+      </div>
+      </div>
+    </article>
+     {% endif %}
+   {% endfor %}
+  </div>
 </div>
 <br>
 

@@ -9,6 +9,7 @@ from django.views.generic import (ListView, DetailView,
 from .models import Review, Category, Comment
 from .forms import ReviewCreateForm, AddCommentForm
 from django.core.paginator import Paginator
+from django.db.models import Count
 
 choises = Category.objects.all().values_list('name', 'name')
 
@@ -16,7 +17,8 @@ class ReviewListView(ListView):
     model = Review
     template_name = 'main/index.html'
     context_object_name = 'top_reviews'
-    ordering = ['-likes']
+    #ordering = ['-likes']
+    queryset = Review.objects.annotate(like_count=Count('likes')).order_by('-like_count')
 
     def get_context_data(self, *args, **kwargs):
         context = super(ReviewListView, self).get_context_data(*args, **kwargs)

@@ -15,11 +15,12 @@
             <small class="text-muted">{{r.category}}</small>
           </div>
           <h2><a class="btn article-title btn-lg" href="{% url 'review-detail' r.id %}">{{r.title}}</a></h2>
-          <div class="card">
+          <div class="container">
             {% if r.images.url %}
               <img class="article-img" src="{{ r.images.url }}" alt="">
             {% endif %}
             <p class="article-content mt-2">{{r.content|slice:"200"}}</p>
+            <strong> {{ r.likes.count }} likes</strong>
         </div>
         </div>
       </article>
