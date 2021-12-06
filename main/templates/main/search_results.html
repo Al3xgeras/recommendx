@@ -39,7 +39,7 @@
     
     {% for r in result_third %}
         <article class="media content-section">
-            <img class="rounded-circle article-img" src="{{ r.review.publisher.profile.image.url }}" onerror="if (this.src != 'default.png') this.src = 'https://res.cloudinary.com/recommendx-herokuapp-com/image/upload/v1638789851/media/default.png'">
+            <img class="rounded-circle article-img" src="{{ r.review.publisher.profile.image.url }}" onerror="this.src='https://res.cloudinary.com/recommendx-herokuapp-com/image/upload/v1638789851/media/default.png'">
             <div class="media-body">
             <div class="article-metadata">
                 <a class="mr-2 btn btn-light btn-sm" href="{% url 'user-reviews' r.review.publisher.username %}">By {{r..review.publisher}}</a>
