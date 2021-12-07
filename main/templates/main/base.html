@@ -29,6 +29,22 @@
           <li class="nav-item">
             <a class="nav-link" href="{% url 'homepage' %}">Home</a>
           </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              Categories
+            </a>
+            {% if categories %}
+              <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                {% for cat in categories %}
+                  <li><a class="dropdown-item" href="{% url 'category' cat|slugify %}">{{cat}}</a></li>
+                {% endfor %}
+                {% if user.is_authenticated %}
+                  <li><hr class="dropdown-divider"></li>
+                  <a class="nav-link" href="{% url 'review-create' %}">New Review</a>
+                {% endif %}
+              </ul>
+            {% endif %}
+          </li>
           {% if user.is_authenticated %}
             <a class="nav-link" href="{% url 'profile' %}">Profile</a>
             <a class="nav-link" href="{% url 'logout' %}">Logout</a>

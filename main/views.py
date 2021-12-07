@@ -23,6 +23,7 @@ class ReviewListView(ListView):
     def get_context_data(self, *args, **kwargs):
         context = super(ReviewListView, self).get_context_data(*args, **kwargs)
         context['latest_reviews'] = Review.objects.all().order_by('-date')
+        context['categories'] = Category.objects.all()
         return context 
 
 class UserReviewListView(ListView):
